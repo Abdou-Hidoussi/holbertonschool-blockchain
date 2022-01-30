@@ -10,6 +10,8 @@
 
 /* libs */
 
+#include "../../crypto/hblk_crypto.h"
+#include "provided/endianness.h"
 
 /**
  * struct block_info_s - Block info structure
