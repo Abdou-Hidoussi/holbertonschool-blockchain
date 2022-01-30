@@ -37,6 +37,7 @@ int blockchain_serialize(blockchain_t const *blockchain, char const *path)
 		fwrite((void *)block->hash, SHA256_DIGEST_LENGTH, 1, fp);
 	}
 
+	fclose(fp);
 	return (1);
 
 }
