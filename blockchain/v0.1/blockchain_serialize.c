@@ -26,7 +26,7 @@ int blockchain_serialize(blockchain_t const *blockchain, char const *path)
 
 	fp = fopen(path, "w");
 	fwrite(&header, 1, sizeof(header), fp);
-	for (int i = 0; i < llist_size(blockchain->chain); i++)
+	for (int i = 0; i < header.hblk_blocks; i++)
 	{
 		block = llist_get_node_at(blockchain->chain, i);
 
