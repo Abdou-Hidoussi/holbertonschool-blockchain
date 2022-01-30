@@ -10,7 +10,8 @@ blockchain_t *blockchain_create(void)
 	/* The Block */
 
 	block = malloc(sizeof(block_t));
-
+	if (!block)
+		return (NULL);
 	block->info.index = 0;
 	block->info.difficulty = 0;
 	block->info.timestamp = 1537578000;
@@ -27,8 +28,11 @@ blockchain_t *blockchain_create(void)
 	/* The Chain */
 
 	blockchain = malloc(sizeof(blockchain_t));
-
+	if (!blockchain)
+		return (NULL);
 	blockchain->chain = llist_create(MT_SUPPORT_TRUE);
+	if (!blockchain->chain)
+		return (NULL);
 	llist_add_node(blockchain->chain, block, ADD_NODE_FRONT);
 
 	return (blockchain);
