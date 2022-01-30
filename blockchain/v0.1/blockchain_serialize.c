@@ -25,7 +25,7 @@ int blockchain_serialize(blockchain_t const *blockchain, char const *path)
 	header.hblk_endian = _get_endianness();
 	header.hblk_blocks = llist_size(blockchain->chain);
 
-	fp = fopen(path, "w");
+	fp = fopen(path, "wb");
 	fwrite(&header, sizeof(header), 1, fp);
 	for (i = 0; i < llist_size(blockchain->chain); i++)
 	{
