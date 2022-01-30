@@ -12,7 +12,7 @@ blockchain_t *blockchain_create(void)
 
 	/* The Block */
 
-	block = malloc(1, sizeof(block_t));
+	block = calloc(1, sizeof(block_t));
 
 	block->info.index = 0;
 	block->info.difficulty = 0;
