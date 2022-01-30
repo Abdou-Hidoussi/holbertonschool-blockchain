@@ -15,38 +15,33 @@ uint8_t	_get_endianness(void);
  **/
 int blockchain_serialize(blockchain_t const *blockchain, char const *path)
 {
-	FILE *file;
+	header_file_t header;
 	block_t *block;
-	header_file_t hblk_file;
-	size_t i;
+	FILE *fp;
+	int i;
 
-	if (!blockchain || !path)
-		return (-1);
+	memcpy(header.hblk_magic, "HBLK", 4);
+	memcpy(header.hblk_version, "0.1", 3);
+	header.hblk_endian = _get_endianness();
+	header.hblk_blocks = llist_size(blockchain->chain);
 
-	memcpy(hblk_file.hblk_magic, "HBLK ", 4);
-	memcpy(hblk_file.hblk_version, "0.1", 3);
-	hblk_file.hblk_endian = _get_endianness();
-	hblk_file.hblk_blocks = llist_size(blockchain->chain);
-
-	file = fopen(path, "wb");
-	if (!file)
-		return (-1);
-
-	fwrite(&hblk_file, sizeof(hblk_file), 1, file);
-	for (i = 0; i < hblk_file.hblk_blocks; i++)
+	fp = fopen(path, "wb");
+	fwrite(&header, sizeof(header), 1, fp);
+	for (i = 0; i < llist_size(blockchain->chain); i++)
 	{
 		block = llist_get_node_at(blockchain->chain, i);
 		if (!block)
 		{
-			fclose(file);
+			fclose(fp);
 			return (-1);
 		}
-		fwrite((void *)&block->info, sizeof(block->info), 1, file);
-		fwrite((void *)&block->data.len, sizeof(block->data.len), 1, file);
-		fwrite((void *)block->data.buffer, block->data.len + 1, 1, file);
-		fwrite((void *)block->hash, SHA256_DIGEST_LENGTH, 1, file);
+		fwrite((void *)&block->info, sizeof(block->info), 1, fp);
+		fwrite((void *)&block->data.len, sizeof(block->data.len), 1, fp);
+		fwrite((void *)block->data.buffer, block->data.len + 1, 1, fp);
+		fwrite((void *)block->hash, SHA256_DIGEST_LENGTH, 1, fp);
 	}
-	fclose(file);
-	return (0);
+
+	fclose(fp);
+	return (1);
 
 }
