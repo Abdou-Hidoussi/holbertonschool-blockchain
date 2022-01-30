@@ -12,7 +12,7 @@ blockchain_t *blockchain_create(void)
 
 	/* The Block */
 
-	block = malloc(sizeof(block_t));
+	block = malloc(1, sizeof(block_t));
 
 	block->info.index = 0;
 	block->info.difficulty = 0;
@@ -29,10 +29,9 @@ blockchain_t *blockchain_create(void)
 
 	/* The Chain */
 
-	blockchain = malloc(sizeof(blockchain_t));
+	blockchain = calloc(1, sizeof(blockchain_t));
 
 	blockchain->chain = llist_create(MT_SUPPORT_TRUE);
-
 	llist_add_node(blockchain->chain, block, ADD_NODE_FRONT);
 
 	return (blockchain);
