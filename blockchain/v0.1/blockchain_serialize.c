@@ -18,7 +18,7 @@ int blockchain_serialize(blockchain_t const *blockchain, char const *path)
 	FILE *file;
 	block_t *block;
 	header_file_t hblk_file;
-	int i;
+	size_t i;
 
 	if (!blockchain || !path)
 		return (-1);
