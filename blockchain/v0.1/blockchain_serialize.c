@@ -18,6 +18,7 @@ int blockchain_serialize(blockchain_t const *blockchain, char const *path)
 	header_file_t header;
 	block_t *block;
 	FILE *fp;
+	int i;
 
 	memcpy(header.hblk_magic, "HBLK", 4);
 	memcpy(header.hblk_version, "0.1", 3);
@@ -26,7 +27,7 @@ int blockchain_serialize(blockchain_t const *blockchain, char const *path)
 
 	fp = fopen(path, "w");
 	fwrite(&header, 1, sizeof(header), fp);
-	for (int i = 0; i < header.hblk_blocks; i++)
+	for (i = 0; i < llist_size(blockchain->chain); i++)
 	{
 		block = llist_get_node_at(blockchain->chain, i);
 
