@@ -8,6 +8,7 @@
 #include <string.h>
 #include <llist.h>
 #include <time.h>
+#include<stdio.h>
 
 
 /* libs */
@@ -81,7 +82,19 @@ typedef struct blockchain_s
 	llist_t     *chain;
 } blockchain_t;
 
+/* File structs */
+	/* File Header*/
+		typedef struct header_file
+		{
+			uint32_t hblk_magic[4];
+			uint32_t hblk_version[3];
+			uint32_t hblk_endian;
+			uint32_t hblk_blocks;
+			uint32_t blocks;
+		} header_file_t;
+	/* File Header*/
 
+/* File structs */
 
 /* Functions */
 
@@ -89,7 +102,10 @@ blockchain_t *blockchain_create(void);
 block_t *block_create(block_t const *prev, int8_t const *data, uint32_t data_);
 void block_destroy(block_t *block);
 void blockchain_destroy(blockchain_t *blockchain);
-uint8_t *block_hash(block_t const *block, uint8_t hash_buf[SHA256_DIGEST_LENGTH]);
+uint8_t *block_hash(block_t const *block,
+					uint8_t hash_buf[SHA256_DIGEST_LENGTH]);
+int blockchain_serialize(blockchain_t const *blockchain,
+						char const *path);
 
 /* Functions */
 
