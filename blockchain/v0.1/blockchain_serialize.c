@@ -30,18 +30,13 @@ int blockchain_serialize(blockchain_t const *blockchain, char const *path)
 	for (i = 0; i < llist_size(blockchain->chain); i++)
 	{
 		block = llist_get_node_at(blockchain->chain, i);
-		if (!block)
-		{
-			fclose(fp);
-			return (-1);
-		}
+
 		fwrite((void *)&block->info, sizeof(block->info), 1, fp);
 		fwrite((void *)&block->data.len, sizeof(block->data.len), 1, fp);
 		fwrite((void *)block->data.buffer, block->data.len + 1, 1, fp);
 		fwrite((void *)block->hash, SHA256_DIGEST_LENGTH, 1, fp);
 	}
 
-	fclose(fp);
 	return (1);
 
 }
