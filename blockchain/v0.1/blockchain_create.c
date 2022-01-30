@@ -1,7 +1,11 @@
 #include "blockchain.h"
 #include <stdlib.h>
 #include <string.h>
-
+/**
+* init_genesis_block - Creates a genesis block
+* @difficulty: Difficulty of the genesis block
+*  Return: Pointer to the genesis block
+*/
 blockchain_t *blockchain_create(void)
 {
 	block_t *block;
