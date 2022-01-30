@@ -17,14 +17,12 @@ int blockchain_serialize(blockchain_t const *blockchain, char const *path)
 {
 	header_file_t header;
 	block_t *block;
-
+	FILE *fp;
 
 	memcpy(header.hblk_magic, "HBLK", 4);
 	memcpy(header.hblk_version, "0.1", 3);
 	header.hblk_endian = _get_endianness();
 	header.hblk_blocks = llist_size(blockchain->chain);
-
-	FILE *fp;
 
 	fp = fopen(path, "w");
 	fwrite(&header, 1, sizeof(header), fp);
