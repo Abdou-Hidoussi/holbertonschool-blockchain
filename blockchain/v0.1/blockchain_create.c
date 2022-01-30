@@ -12,9 +12,8 @@ blockchain_t *blockchain_create(void)
 
 	/* The Block */
 
-	block = calloc(1, sizeof(block_t));
-	if (!block)
-		return (NULL); /* add error message layer */
+	block = malloc(sizeof(block_t));
+
 	block->info.index = 0;
 	block->info.difficulty = 0;
 	block->info.timestamp = 1537578000;
@@ -30,12 +29,10 @@ blockchain_t *blockchain_create(void)
 
 	/* The Chain */
 
-	blockchain = calloc(1, sizeof(blockchain_t));
-	if (!blockchain)
-		return (NULL); /* add error message layer */
+	blockchain = malloc(sizeof(blockchain_t));
+
 	blockchain->chain = llist_create(MT_SUPPORT_TRUE);
-	if (!blockchain->chain)
-		return (NULL); /* add error message layer */
+
 	llist_add_node(blockchain->chain, block, ADD_NODE_FRONT);
 
 	return (blockchain);
