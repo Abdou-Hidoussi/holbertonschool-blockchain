@@ -11,7 +11,6 @@
 /* libs */
 
 
-#define SHA256_DIGEST_LENGTH 256
 /**
  * struct block_info_s - Block info structure
  *
