@@ -1,6 +1,5 @@
 #include "blockchain.h"
-#include <stdlib.h>
-#include <string.h>
+
 /**
  * blockchain_create - Creates a blockchain
  * Return: Pointer to the blockchain
