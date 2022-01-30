@@ -10,9 +10,8 @@
 
 /* libs */
 
-#include "../../crypto/hblk_crypto.h"
-#include "provided/endianness.h"
 
+#define SHA256_DIGEST_LENGTH 32
 /**
  * struct block_info_s - Block info structure
  *
